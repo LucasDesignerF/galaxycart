@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Galaxy Cart - Hospedagem premium para Minecraft e Discord Bots com performance excepcional">
-    <link rel="icon" type="image/png" href="https://i.imgur.com/1u7iCmD.png">
+    <link rel="icon" type="image/png" href="https://imgur.com/CyeFum5.png">
     <title>Galaxy Cart | Hospedagem Premium</title>
     
     <!-- Tailwind CSS -->
@@ -179,11 +179,8 @@
         <div class="container mx-auto px-4 lg:px-6 py-3">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
-                <a href="#" class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
-                        <i class='bx bx-ghost text-xl'></i>
-                    </div>
-                    <span class="text-2xl font-bold font-orbitron gradient-text tracking-wider">GALAXY CART</span>
+                <a href="#" class="flex items-center">
+                    <img src="https://imgur.com/BIsh6K5.png" alt="Galaxy Cart Logo" class="h-10 w-auto">
                 </a>
                 
                 <!-- Desktop Navigation -->
@@ -647,11 +644,8 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                 <!-- Logo e Sobre -->
                 <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
-                            <i class='bx bx-ghost text-xl'></i>
-                        </div>
-                        <span class="text-xl font-bold font-orbitron gradient-text tracking-wider">GALAXY CART</span>
+                    <div class="flex items-center mb-4">
+                        <img src="https://imgur.com/BIsh6K5.png" alt="Galaxy Cart Logo" class="h-10 w-auto">
                     </div>
                     <p class="text-gray-400 mb-4">Soluções premium em hospedagem para Minecraft e Discord.</p>
                     <div class="flex space-x-4">
@@ -694,12 +688,12 @@
                 <div>
                     <h4 class="text-lg font-bold mb-4">Newsletter</h4>
                     <p class="text-gray-400 mb-4">Inscreva-se para receber novidades e promoções.</p>
-                    <form class="flex">
+                    <div class="flex">
                         <input type="email" placeholder="Seu email" class="modern-input px-4 py-2 rounded-l-lg focus:outline-none w-full">
                         <button type="submit" class="px-4 py-2 gradient-bg hover:bg-primary-600 rounded-r-lg transition">
                             <i class='bx bx-send'></i>
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
             
@@ -748,8 +742,8 @@
         
         mobileMenuButton.addEventListener('click', function() {
             mobileMenu.classList.toggle('hidden');
-            this.innerHTML = mobileMenu.classList.contains('hidden') ? 
-                '<i class="bx bx-menu text-3xl"></i>' : 
+            this.innerHTML = mobileMenu.classList.contains('hidden') ?
+                '<i class="bx bx-menu text-3xl"></i>' :
                 '<i class="bx bx-x text-3xl"></i>';
         });
 
@@ -768,13 +762,10 @@
             }
             
             if (currentScroll > lastScroll && !mobileMenu.classList.contains('hidden')) {
-                // Scrolling down and mobile menu is open
                 navbar.classList.remove('navbar-hidden');
             } else if (currentScroll > lastScroll) {
-                // Scrolling down
                 navbar.classList.add('navbar-hidden');
             } else {
-                // Scrolling up
                 navbar.classList.remove('navbar-hidden');
                 navbar.style.backdropFilter = 'blur(12px)';
                 navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.8)';
@@ -817,7 +808,6 @@
                         behavior: 'smooth'
                     });
                     
-                    // Close mobile menu if open
                     if (!mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
                         mobileMenuButton.innerHTML = '<i class="bx bx-menu text-3xl"></i>';
