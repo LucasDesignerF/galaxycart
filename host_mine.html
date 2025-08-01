@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galaxy Cart - Hospedagem premium para servidores Minecraft com performance excepcional">
+    <link rel="icon" type="image/png" href="https://i.imgur.com/1u7iCmD.png">
+    <title>Galaxy Cart | Hospedagem Minecraft</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#1a1a1a',
+                            700: '#2a2a2a',
+                            600: '#3a3a3a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        orbitron: ['Orbitron', 'sans-serif']
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #c084fc 0%, #a855f7 50%, #7e22ce 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+        }
+        
+        .glass {
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.1);
+        }
+        
+        .hero-pattern {
+            background-image: radial-gradient(circle at 25% 25%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(126, 34, 206, 0.2);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #7e22ce;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+        
+        .navbar {
+            transition: all 0.4s ease;
+        }
+        
+        .navbar-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        
+        .modern-input {
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 26, 0.5);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+        
+        .modern-input:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-100 font-sans antialiased">
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-dark-900 z-50 flex items-center justify-center">
+        <div class="flex flex-col items-center">
+            <div class="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-6 text-primary-400 font-orbitron tracking-wider animate-pulse">GALAXY CART</p>
+        </div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-primary-400 opacity-20 floating" style="animation-delay: 0s;"></div>
+        <div class="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-primary-300 opacity-20 floating" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-4 h-4 rounded-full bg-primary-500 opacity-15 floating" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-1/3 right-1/3 w-3 h-3 rounded-full bg-primary-400 opacity-20 floating" style="animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Modern Navbar -->
+    <header id="navbar" class="fixed w-full z-40 navbar">
+        <div class="container mx-auto px-4 lg:px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+                        <i class='bx bx-ghost text-xl'></i>
+                    </div>
+                    <span class="text-2xl font-bold font-orbitron gradient-text tracking-wider">GALAXY CART</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <a href="host_mine.html" class="px-4 py-2 rounded-lg bg-dark-800/50 font-medium text-white group">
+                        <span class="gradient-text font-orbitron">01.</span> <span class="gradient-text">Host Minecraft</span>
+                    </a>
+                    <a href="host_bot.html" class="px-4 py-2 rounded-lg hover:bg-dark-800/50 transition-all duration-300 font-medium text-gray-300 hover:text-white group">
+                        <span class="gradient-text font-orbitron">02.</span> <span class="group-hover:gradient-text transition-all">Host Bots</span>
+                    </a>
+                    <a href="discord_bots.html" class="px-4 py-2 rounded-lg hover:bg-dark-800/50 transition-all duration-300 font-medium text-gray-300 hover:text-white group">
+                        <span class="gradient-text font-orbitron">03.</span> <span class="group-hover:gradient-text transition-all">Bots Prontos</span>
+                    </a>
+                    <a href="#" class="ml-2 px-5 py-2 gradient-bg hover:bg-primary-600 rounded-lg transition-all duration-300 font-medium text-white shadow-lg shadow-primary-500/20 flex items-center">
+                        <i class='bx bx-log-in mr-2'></i> Área do Cliente
+                    </a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                    <i class='bx bx-menu text-3xl'></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-800/95 backdrop-blur-md border-t border-dark-700">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-3">
+                <a href="host_mine.html" class="px-4 py-3 rounded-lg bg-dark-700 font-medium text-white border-l-4 border-primary-500">
+                    <span class="gradient-text font-orbitron">01.</span> Host Minecraft
+                </a>
+                <a href="host_bot.html" class="px-4 py-3 rounded-lg hover:bg-dark-700 transition font-medium text-gray-300 hover:text-white border-l-4 border-primary-500">
+                    <span class="gradient-text font-orbitron">02.</span> Host Bots
+                </a>
+                <a href="discord_bots.html" class="px-4 py-3 rounded-lg hover:bg-dark-700 transition font-medium text-gray-300 hover:text-white border-l-4 border-primary-500">
+                    <span class="gradient-text font-orbitron">03.</span> Bots Prontos
+                </a>
+                <a href="#" class="px-4 py-3 gradient-bg hover:bg-primary-600 rounded-lg transition font-medium text-white text-center mt-2 flex items-center justify-center">
+                    <i class='bx bx-log-in mr-2'></i> Área do Cliente
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-[60vh] hero-pattern flex items-center pt-24 pb-16 px-4 overflow-hidden">
+        <div class="container mx-auto text-center" data-aos="fade-up">
+            <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-6">
+                <span class="font-orbitron tracking-tight">HOSPEDAGEM</span> <span class="gradient-text font-orbitron">MINECRAFT</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                Servidores de alto desempenho para sua experiência Minecraft com suporte 24/7.
+            </p>
+            <a href="#pricing" class="inline-block px-8 py-4 gradient-bg hover:bg-primary-600 rounded-lg text-lg font-medium transition-all duration-300 shadow-lg shadow-primary-500/30">
+                Ver Planos <i class='bx bx-chevron-right text-xl ml-2'></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-4 bg-dark-800/30">
+        <div class="container mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-sm uppercase tracking-widest text-primary-400 mb-4 font-orbitron">PLANOS MINECRAFT</h2>
+                <h3 class="text-3xl md:text-4xl font-bold mb-6">Escolha Sua <span class="gradient-text">Aventura</span></h3>
+                <p class="text-gray-400 max-w-2xl mx-auto">Planos escaláveis para todos os tamanhos de servidores Minecraft.</p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                <!-- Plano Starter -->
+                <div class="glass rounded-2xl p-8 border border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover" data-aos="fade-up">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Starter</h3>
+                        <p class="text-gray-400">Ideal para pequenos servidores</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold">R$8,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>1GB RAM DDR4</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>2 vCPU Ryzen</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>5GB NVMe SSD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>1 Backup Diário</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-4 text-center bg-dark-700 hover:gradient-bg rounded-lg transition-all duration-300 font-medium">Selecionar</a>
+                </div>
+                
+                <!-- Plano Basic -->
+                <div class="relative" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 left-0 right-0 h-1 gradient-bg"></div>
+                    <div class="glass rounded-2xl p-8 border border-primary-500/50 pt-10 h-full card-hover">
+                        <div class="absolute top-0 right-0 bg-primary-500 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-2">Basic</h3>
+                            <p class="text-gray-400">Perfeito para comunidades pequenas</p>
+                        </div>
+                        <div class="mb-8">
+                            <span class="text-4xl font-bold">R$16,00</span>
+                            <span class="text-gray-400">/mês</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>2GB RAM DDR4</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>2 vCPU Ryzen</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>10GB NVMe SSD</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>2 Backups Diários</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>Suporte Prioritário</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="block w-full py-3 px-4 text-center gradient-bg hover:bg-primary-600 rounded-lg transition-all duration-300 font-medium shadow-lg shadow-primary-500/20">Selecionar</a>
+                    </div>
+                </div>
+                
+                <!-- Plano Advanced -->
+                <div class="glass rounded-2xl p-8 border border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Advanced</h3>
+                        <p class="text-gray-400">Para servidores médios</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold">R$24,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>3GB RAM DDR4</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>3 vCPU Ryzen</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>15GB NVMe SSD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>3 Backups Diários</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>Suporte VIP</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-4 text-center bg-dark-700 hover:gradient-bg rounded-lg transition-all duration-300 font-medium">Selecionar</a>
+                </div>
+                
+                <!-- Plano Pro -->
+                <div class="glass rounded-2xl p-8 border border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover" data-aos="fade-up">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Pro</h3>
+                        <p class="text-gray-400">Para servidores com mods pesados</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold">R$32,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>4GB RAM DDR4</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>4 vCPU Ryzen</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>20GB NVMe SSD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>4 Backups Diários</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>Suporte VIP 24/7</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-4 text-center bg-dark-700 hover:gradient-bg rounded-lg transition-all duration-300 font-medium">Selecionar</a>
+                </div>
+                
+                <!-- Plano Elite -->
+                <div class="relative" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 left-0 right-0 h-1 gradient-bg"></div>
+                    <div class="glass rounded-2xl p-8 border border-primary-500/50 pt-10 h-full card-hover">
+                        <div class="absolute top-0 right-0 bg-primary-500 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">RECOMENDADO</div>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-2">Elite</h3>
+                            <p class="text-gray-400">Para grandes comunidades</p>
+                        </div>
+                        <div class="mb-8">
+                            <span class="text-4xl font-bold">R$48,00</span>
+                            <span class="text-gray-400">/mês</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>6GB RAM DDR4</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>4 vCPU Ryzen</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>30GB NVMe SSD</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>5 Backups Diários</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>Suporte VIP 24/7</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="block w-full py-3 px-4 text-center gradient-bg hover:bg-primary-600 rounded-lg transition-all duration-300 font-medium shadow-lg shadow-primary-500/20">Selecionar</a>
+                    </div>
+                </div>
+                
+                <!-- Plano Ultimate -->
+                <div class="glass rounded-2xl p-8 border border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Ultimate</h3>
+                        <p class="text-gray-400">Para servidores de alto tráfego</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold">R$64,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>8GB RAM DDR4</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>6 vCPU Ryzen</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>40GB NVMe SSD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>7 Backups Diários</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>Suporte VIP 24/7</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-4 text-center bg-dark-700 hover:gradient-bg rounded-lg transition-all duration-300 font-medium">Selecionar</a>
+                </div>
+                
+                <!-- Plano Master -->
+                <div class="glass rounded-2xl p-8 border border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover" data-aos="fade-up">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Master</h3>
+                        <p class="text-gray-400">Para servidores profissionais</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold">R$80,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>10GB RAM DDR4</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>8 vCPU Ryzen</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>50GB NVMe SSD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>10 Backups Diários</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>Suporte VIP 24/7</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-4 text-center bg-dark-700 hover:gradient-bg rounded-lg transition-all duration-300 font-medium">Selecionar</a>
+                </div>
+                
+                <!-- Plano Legend -->
+                <div class="relative" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 left-0 right-0 h-1 gradient-bg"></div>
+                    <div class="glass rounded-2xl p-8 border border-primary-500/50 pt-10 h-full card-hover">
+                        <div class="absolute top-0 right-0 bg-primary-500 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">PREMIUM</div>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-2">Legend</h3>
+                            <p class="text-gray-400">Para mega servidores</p>
+                        </div>
+                        <div class="mb-8">
+                            <span class="text-4xl font-bold">R$96,00</span>
+                            <span class="text-gray-400">/mês</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>12GB RAM DDR4</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>8 vCPU Ryzen</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>60GB NVMe SSD</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>12 Backups Diários</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>Suporte VIP 24/7</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="block w-full py-3 px-4 text-center gradient-bg hover:bg-primary-600 rounded-lg transition-all duration-300 font-medium shadow-lg shadow-primary-500/20">Selecionar</a>
+                    </div>
+                </div>
+                
+                <!-- Plano God -->
+                <div class="glass rounded-2xl p-8 border border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">God</h3>
+                        <p class="text-gray-400">Para servidores épicos</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold">R$128,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>16GB RAM DDR4</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>10 vCPU Ryzen</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>80GB NVMe SSD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>15 Backups Diários</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>Suporte VIP 24/7</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-4 text-center bg-dark-700 hover:gradient-bg rounded-lg transition-all duration-300 font-medium">Selecionar</a>
+                </div>
+                
+                <!-- Plano Titan -->
+                <div class="glass rounded-2xl p-8 border border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover" data-aos="fade-up">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Titan</h3>
+                        <p class="text-gray-400">Para redes de servidores</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold">R$160,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>20GB RAM DDR4</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>12 vCPU Ryzen</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>100GB NVMe SSD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>20 Backups Diários</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>Suporte VIP 24/7</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-4 text-center bg-dark-700 hover:gradient-bg rounded-lg transition-all duration-300 font-medium">Selecionar</a>
+                </div>
+                
+                <!-- Plano Omega -->
+                <div class="relative" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 left-0 right-0 h-1 gradient-bg"></div>
+                    <div class="glass rounded-2xl p-8 border border-primary-500/50 pt-10 h-full card-hover">
+                        <div class="absolute top-0 right-0 bg-primary-500 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">ULTRA</div>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-2">Omega</h3>
+                            <p class="text-gray-400">Para servidores massivos</p>
+                        </div>
+                        <div class="mb-8">
+                            <span class="text-4xl font-bold">R$256,00</span>
+                            <span class="text-gray-400">/mês</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>32GB RAM DDR4</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>14 vCPU Ryzen</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>160GB NVMe SSD</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>25 Backups Diários</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class='bx bx-check text-primary-400 mr-2'></i>
+                                <span>Suporte VIP 24/7</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="block w-full py-3 px-4 text-center gradient-bg hover:bg-primary-600 rounded-lg transition-all duration-300 font-medium shadow-lg shadow-primary-500/20">Selecionar</a>
+                    </div>
+                </div>
+                
+                <!-- Plano Infinity -->
+                <div class="glass rounded-2xl p-8 border border-dark-700 hover:border-primary-500 transition-all duration-300 card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">Infinity</h3>
+                        <p class="text-gray-400">Para servidores ilimitados</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="text-4xl font-bold">R$512,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>64GB RAM DDR4</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>16 vCPU Ryzen</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>320GB NVMe SSD</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>40 Backups Diários</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class='bx bx-check text-primary-400 mr-2'></i>
+                            <span>Suporte VIP 24/7</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-4 text-center bg-dark-700 hover:gradient-bg rounded-lg transition-all duration-300 font-medium">Selecionar</a>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center" data-aos="fade-up">
+                <p class="text-gray-400">Precisa de algo personalizado? <a href="#contact" class="text-primary-400 hover:underline">Fale conosco</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-dark-800 py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Logo e Sobre -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+                            <i class='bx bx-ghost text-xl'></i>
+                        </div>
+                        <span class="text-xl font-bold font-orbitron gradient-text tracking-wider">GALAXY CART</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Soluções premium em hospedagem para Minecraft e Discord.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition">
+                            <i class='bx bxl-discord-alt text-xl'></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition">
+                            <i class='bx bxl-twitter text-xl'></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition">
+                            <i class='bx bxl-instagram text-xl'></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary-400 transition">Início</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-primary-400 transition">Serviços</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-primary-400 transition">Recursos</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-primary-400 transition">Planos</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-primary-400 transition">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Serviços -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Serviços</h4>
+                    <ul class="space-y-2">
+                        <li><a href="host_mine.html" class="text-gray-400 hover:text-primary-400 transition">Host Minecraft</a></li>
+                        <li><a href="host_bot.html" class="text-gray-400 hover:text-primary-400 transition">Host Bots</a></li>
+                        <li><a href="discord_bots.html" class="text-gray-400 hover:text-primary-400 transition">Bots Prontos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary-400 transition">Área do Cliente</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Inscreva-se para receber novidades e promoções.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Seu email" class="modern-input px-4 py-2 rounded-l-lg focus:outline-none w-full">
+                        <button type="submit" class="px-4 py-2 gradient-bg hover:bg-primary-600 rounded-r-lg transition">
+                            <i class='bx bx-send'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-dark-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 Galaxy Cart. Todos os direitos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-primary-400 text-sm transition">Termos</a>
+                    <a href="#" class="text-gray-500 hover:text-primary-400 text-sm transition">Privacidade</a>
+                    <a href="#" class="text-gray-500 hover:text-primary-400 text-sm transition">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 gradient-bg rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all hover:bg-primary-600">
+        <i class='bx bx-chevron-up text-xl'></i>
+    </button>
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Preloader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            this.innerHTML = mobileMenu.classList.contains('hidden') ? 
+                '<i class="bx bx-menu text-3xl"></i>' : 
+                '<i class="bx bx-x text-3xl"></i>';
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 100) {
+                navbar.classList.remove('navbar-hidden');
+                navbar.style.backdropFilter = 'blur(12px)';
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.8)';
+                return;
+            }
+            
+            if (currentScroll > lastScroll && !mobileMenu.classList.contains('hidden')) {
+                navbar.classList.remove('navbar-hidden');
+            } else if (currentScroll > lastScroll) {
+                navbar.classList.add('navbar-hidden');
+            } else {
+                navbar.classList.remove('navbar-hidden');
+                navbar.style.backdropFilter = 'blur(12px)';
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.8)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.innerHTML = '<i class="bx bx-menu text-3xl"></i>';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
